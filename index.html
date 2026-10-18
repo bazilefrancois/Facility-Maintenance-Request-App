@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163c65">
+  <title>FacilityFix | Maintenance Requests</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><div class="brand"><span class="brand-icon">⚒</span><span>Facility<span class="accent">Fix</span></span></div><span class="tagline">Maintenance made simple</span></header>
+  <main class="container">
+    <section id="loginView" class="auth-card panel">
+      <div class="eyebrow">WELCOME TO FACILITYFIX</div>
+      <h1>Keep every repair on track.</h1>
+      <p class="muted">Submit maintenance issues and follow their progress in one place.</p>
+      <form id="loginForm">
+        <label for="displayName">Your name</label><input id="displayName" maxlength="60" required placeholder="e.g. Jordan Lee" autocomplete="name">
+        <label for="role">Demo role</label><select id="role"><option value="employee">Employee</option><option value="staff">Facilities staff</option></select>
+        <button class="primary full" type="submit">Enter FacilityFix →</button>
+      </form>
+      <p class="note">Prototype access only: selecting a role is not secure authentication.</p>
+    </section>
+    <section id="appView" hidden>
+      <div class="welcome"><div><div class="eyebrow">FACILITY MAINTENANCE PORTAL</div><h1>Maintenance requests</h1><p class="muted" id="welcomeText"></p></div><button id="logoutBtn" class="secondary">Switch user</button></div>
+      <nav class="app-nav" aria-label="Main navigation"><button type="button" class="secondary" id="dashboardNav">Dashboard</button><button type="button" class="secondary" id="newNav">New request</button><button type="button" class="secondary" id="historyNav">Request history</button></nav><div class="stats"><article class="stat"><span>Total requests</span><strong id="totalCount">0</strong></article><article class="stat"><span>Pending</span><strong id="pendingCount">0</strong></article><article class="stat"><span>In progress</span><strong id="progressCount">0</strong></article><article class="stat"><span>Completed</span><strong id="completeCount">0</strong></article></div>
+      <div class="layout"><section class="panel" id="requestPanel"><div class="section-title"><h2>New request</h2><span class="pill">Employee</span></div><p class="muted">Tell the facilities team what needs attention.</p>
+        <form id="requestForm"><label for="requestTitle">Issue title</label><input id="requestTitle" maxlength="100" required placeholder="e.g. Leaking faucet">
+        <label for="building">Campus building / location</label><select id="building" required></select>
+        <div class="two"><div><label for="floor">Floor (optional)</label><select id="floor"><option value="">Not applicable / unspecified</option><option>Ground</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>Outside</option></select></div><div><label for="room">Room or area</label><input id="room" maxlength="100" placeholder="Room 205, north entrance, etc."></div></div>
+        <label for="otherLocation" id="otherLocationLabel" hidden>Other location name</label><input id="otherLocation" maxlength="100" placeholder="Specify location" hidden>
+        <div class="gps-actions"><button type="button" class="secondary" id="gpsBtn">Use my current location (optional)</button><button type="button" class="secondary" id="clearGpsBtn" hidden>Remove GPS</button></div><p id="gpsMessage" class="note" role="status" aria-live="polite">GPS requires browser permission and usually HTTPS or localhost. Building and room details are sufficient without GPS.</p>
+        <div class="two"><div><label for="category">Category</label><select id="category"><option>Plumbing</option><option>Electrical</option><option>HVAC</option><option>Cleaning</option><option>Grounds</option><option>Fire Alarm</option><option>Other</option></select></div><div><label for="priority">Priority</label><select id="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></div></div>
+        <label for="photo">Photo of issue (optional, JPEG/PNG/WebP, up to 1 MB)</label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><img id="photoPreview" class="photo-preview" alt="Selected maintenance issue preview" hidden><p id="photoMessage" class="note" role="status"></p><label for="description">Description</label><textarea id="description" maxlength="1000" rows="4" required placeholder="Describe the issue and any helpful details"></textarea><button class="primary full" type="submit">Submit maintenance request</button><p id="formMessage" class="success" role="status" aria-live="polite"></p></form>
+      </section><section class="panel dashboard"><div class="section-title"><h2>Request dashboard</h2><span class="pill" id="rolePill">Employee view</span></div><div class="filters"><label class="sr-only" for="statusFilter">Filter requests by status</label><select id="statusFilter"><option value="all">All statuses</option><option>Pending</option><option>In Progress</option><option>Completed</option></select><label class="sr-only" for="buildingFilter">Filter requests by building</label><select id="buildingFilter"><option value="all">All campus locations</option></select></div><div id="requestList" class="request-list" aria-live="polite"></div></section></div>
+    </section>
+  </main><dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailTitle"><div class="section-title"><h2 id="detailTitle">Request details</h2><button type="button" class="secondary" id="closeDetails">Close</button></div><div id="detailBody"></div></dialog><footer>FacilityFix • Student project prototype • Data stored in this browser only</footer>
+</body>
+</html>
